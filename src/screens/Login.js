@@ -1,15 +1,25 @@
-import React from "react";
-import { Button } from "react-native";
+import React from 'react';
+import { inject, observer } from "mobx-react";
+import { Button } from 'react-native';
 
 import FloatingLabelInput from "../common-components/FloatingLabelInput";
 
-export default function Login(props) {
+
+const Login = (props) => {
   const { navigation } = props;
 
   return (
     <>
       <FloatingLabelInput />
-      <Button title="Go back" onPress={() => navigation.goBack()} />
+
+
+      <Button
+          title="check posts"
+          onPress={() => navigation.navigate('Posts')}
+        />
     </>
   );
-}
+};
+
+
+export default inject("store")(observer(Login));
