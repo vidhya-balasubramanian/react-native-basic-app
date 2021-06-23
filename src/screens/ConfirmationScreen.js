@@ -10,7 +10,7 @@ const Login = (props) => {
   const { navigation } = props;
 
   const [email, setEmail] = useState("vidhya.b@adcuratio.com");
-  const [password, setPassword] = useState("Adcuratio@123");
+  const [code, setCode] = useState("");
 
   useEffect(() => {
     Amplify.configure({
@@ -20,39 +20,39 @@ const Login = (props) => {
         userPoolWebClientId: "44ih9dp4s39m4iecgqcib522mk",
       },
     });
-  }, []);  
+  }, []);
 
-  const signIn = (e) => {
+  const confirmSignUp = (e) => {
     e.preventDefault();
-    Auth.signIn({
-      username: email,
-      password,
-    })
-      .then((user) => {
+    Auth.confirmSignUp(email, code)
+      .then((data) => {
+        console.log(data);
+        setWaitingForCode(false);
         setEmail("");
-        setPassword("");
-        console.log(user);
+        setCode("");
       })
-      .catch((err) => {
-        console.log(err);
+      .catch((err) => console.log(err));
+  };
+  const resendCode = () => {
+    Auth.resendSignUp(email)
+      .then(() => {
+        console.log("code resent successfully");
+      })
+      .catch((e) => {
+        console.log(e);
       });
   };
 
   return (
-    <View style={styles.ViewWrapper}>     
-      <Text>Sign In</Text>
+    <View style={styles.ViewWrapper}>
       <FloatingLabelInput
-            label="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <FloatingLabelInput
-            label="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Button color="red" title="Sign In" onPress={signIn} />
+        label="Confirmation Code"
+        value={code}
+        onChange={(e) => setCode(e.target.value)}
+      />
+      <Button color="red" title=" Confirm Sign Up" onPress={confirmSignUp} />
 
+      <Button color="red" title="Resend code" onPress={resendCode} />
     </View>
   );
 };
@@ -75,8 +75,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   ButtonWrapper: {
-    color: "red"
-  }
+    color: "red",
+  },
 });
 
 export default inject("store")(observer(Login));

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
-import { StyleSheet, Image, Button, View, Text } from "react-native";
+import { StyleSheet, Image, Button, View } from "react-native";
 import { Auth } from "aws-amplify";
 import Amplify from "aws-amplify";
 
@@ -20,58 +20,53 @@ const Login = (props) => {
         userPoolWebClientId: "44ih9dp4s39m4iecgqcib522mk",
       },
     });
-  }, []);  
+  }, []);
 
-  const signIn = (e) => {
+  const signUp = (e) => {
     e.preventDefault();
-    Auth.signIn({
-      username: email,
-      password,
-    })
-      .then((user) => {
-        setEmail("");
-        setPassword("");
-        console.log(user);
+    Auth.signUp({ username: email, password, attributes: { email } })
+      .then((data) => {
+        console.log(data);
       })
       .catch((err) => {
         console.log(err);
       });
   };
-
+  
   return (
-    <View style={styles.ViewWrapper}>     
-      <Text>Sign In</Text>
-      <FloatingLabelInput
-            label="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <FloatingLabelInput
-            label="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Button color="red" title="Sign In" onPress={signIn} />
-
+    <View style={styles.SignupWrapper}>
+      <View style={styles.InputBoxesWrapper}>
+        <Image style={styles.Logo} source={require("../assets/logo.jpg")} />
+        <FloatingLabelInput
+          label="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <FloatingLabelInput
+          label="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+      </View>
+      <View style={[{ width: "80%" }]}>
+        <Button color="red" title="Login" onPress={signUp} />
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  ViewWrapper: {
-    // height: "100%",
-    // backgroundColor: "#fff",
+  SignupWrapper: {
+    height: "100%",
+    backgroundColor: "#fff",
   },
-  ViewWrapper2: {
+  InputBoxesWrapper: {
     width: "80%",
-    // display: "block",
     margin: "auto",
   },
   Logo: {
     width: 85,
     height: 85,
-    // display: "block",
-    // margin: "auto",
     marginBottom: 20,
   },
   ButtonWrapper: {
