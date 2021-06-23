@@ -17,14 +17,8 @@ const Login = (props) => {
         <FloatingLabelInput label="Password" />
       </View>
       <Button
-          title="Login" />
-
-
-
-      {/* <Button
-          title="check posts"
-          onPress={() => navigation.navigate('Posts')}
-        /> */}
+          title="Login"
+          onPress={() => navigation.navigate('Posts')} />
     </View>
   );
 };
@@ -36,15 +30,15 @@ const styles = StyleSheet.create({
   },
   ViewWrapper2: {
     width: "80%",
-    display: "block",
+    // display: "block",
     margin: "auto"
 
   },
   Logo: {
     width: 85,
     height: 85,
-    display: "block",
-    margin: "auto",
+    // display: "block",
+    // margin: "auto",
     marginBottom: 20,
   },
 });

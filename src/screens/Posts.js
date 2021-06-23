@@ -1,18 +1,20 @@
 import React from 'react';
-import { Button, Text } from 'react-native';
+import { Button, Text, ScrollView } from 'react-native';
 import { inject, observer } from "mobx-react";
 
 const Posts = (props) => {
   const { getCount, updateCount } = props.store;
   return (
     <>
-      <Button
+      {/* <Button
           title="Update Count"
           onPress={() => updateCount()}
         />
-      <Text>{getCount}</Text>
+      <Text>{getCount}</Text> */}
+
+      
     </>
-  );
+  )
 };
 
 

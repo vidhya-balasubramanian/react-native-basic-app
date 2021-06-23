@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import {
   StyleSheet,
   View,
@@ -13,13 +13,25 @@ export default function FloatingLabelInput(props) {
   const handleFocus = () => {
     setIsFocused(true);
   }
+
+  const labelStyle = {
+    fontSize: 16,
+    position: 'absolute',
+    left: 14,
+    bottom: !isFocused ? 12 : 31,
+    fontSize: !isFocused ? 15 : 17,
+    color: !isFocused ? 'red' : 'blue',
+    // padding: "0 8px",
+    backgroundColor: "#fff"
+  };
+
   return (
       <View style={styles.ViewWrapper}>
         <TextInput 
           style={styles.TextInput} 
-          onFocus={handleFocus}/>
+          onFocus={handleFocus} />
         <Text 
-          style={isFocused ? styles.TextWrapperFocussed : styles.TextWrapper}
+          style={labelStyle}
           onClick={() => {
             if (!isFocused) {
               handleFocus()
@@ -36,32 +48,14 @@ const styles = StyleSheet.create({
     marginBottom: 20
   },
   TextInput: {
-    border: "1px solid #1E57F1",
+    borderWidth: 1,
+    borderColor: "#1E57F1",
     borderRadius: 4,
     width: "100%",
-    height: 50,
-    outline: "none",
+    height: 41,
     paddingLeft: 20,
     paddingRight: 20,
     fontSize: 17
-  },
-  TextWrapper: {
-    fontSize: 16,
-    position: "absolute",
-    bottom: 16,
-    color: "#1E57F1",
-    left: 14,
-    padding: "0 8px",
-    backgroundColor: "#fff"
-  },
-  TextWrapperFocussed: {
-    fontSize: 16,
-    position: "absolute",
-    bottom: 38,
-    color: "#1E57F1",
-    left: 14,
-    padding: "0 8px",
-    backgroundColor: "#fff"
   }
 });
 
