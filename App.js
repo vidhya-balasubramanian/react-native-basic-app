@@ -6,6 +6,7 @@ import { Provider } from 'mobx-react';
 import Amplify from "aws-amplify";
 import FlashMessage from "react-native-flash-message";
 
+import AddBookScreen from "./src/screens/AddBookScreen";
 import ConfirmationScreen from "./src/screens/ConfirmationScreen";
 import LoginScreen from "./src/screens/LoginScreen";
 import HomeScreen from "./src/screens/HomeScreen";
@@ -35,17 +36,18 @@ export default function App() {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator
-          initialRouteName="LoginScreen"
+          initialRouteName="SplashScreen"
           screenOptions={{
             headerShown: false,
           }}
-        >
+        > 
           <Stack.Screen name="ConfirmationScreen" component={ConfirmationScreen} />
           <Stack.Screen name="LoginScreen" component={LoginScreen} />
           <Stack.Screen name="HomeScreen" component={HomeScreen} />
           <Stack.Screen name="PostsScreen" component={PostsScreen} />
           <Stack.Screen name="SignupScreen" component={SignupScreen} />
           <Stack.Screen name="SplashScreen" component={SplashScreen} />
+          <Stack.Screen name="AddBookScreen" component={AddBookScreen} />
         </Stack.Navigator>
       </NavigationContainer>
       <FlashMessage 
