@@ -16,7 +16,7 @@ const SplashScreen = (props) => {
       style={styles.BgImage}
     >
       <Image style={styles.Logo} source={require("../assets/logo.jpg")} />
-      <Text style={styles.TextWrapper}>Subtitle</Text>
+      <Text style={styles.TextWrapper}>Welcome to FolksMedia</Text>
     </ImageBackground>
   )
 };
