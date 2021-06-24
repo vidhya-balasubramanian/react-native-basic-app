@@ -10,8 +10,8 @@ import FloatingLabelInput from "../common-components/FloatingLabelInput";
 const LoginScreen = (props) => {
   const { navigation } = props;
 
-  const [email, setEmail] = useState("vidhya.b@adcuratio.com");
-  const [password, setPassword] = useState("Adcuratio@12nkjn3");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
   const signIn = (e) => {
@@ -24,7 +24,7 @@ const LoginScreen = (props) => {
       .then((user) => {
         localStorage.setItem("UserInfo", JSON.stringify(user));
         console.log(user);
-        navigation.navigate("PostsScreen")
+        navigation.navigate("HomeScreen")
       })
       .catch((err) => {
         showMessage({

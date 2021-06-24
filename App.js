@@ -8,6 +8,7 @@ import FlashMessage from "react-native-flash-message";
 
 import ConfirmationScreen from "./src/screens/ConfirmationScreen";
 import LoginScreen from "./src/screens/LoginScreen";
+import HomeScreen from "./src/screens/HomeScreen";
 import PostsScreen from "./src/screens/PostsScreen";
 import SignupScreen from "./src/screens/SignupScreen";
 import SplashScreen from "./src/screens/SplashScreen";
@@ -41,10 +42,10 @@ export default function App() {
         >
           <Stack.Screen name="ConfirmationScreen" component={ConfirmationScreen} />
           <Stack.Screen name="LoginScreen" component={LoginScreen} />
+          <Stack.Screen name="HomeScreen" component={HomeScreen} />
           <Stack.Screen name="PostsScreen" component={PostsScreen} />
           <Stack.Screen name="SignupScreen" component={SignupScreen} />
           <Stack.Screen name="SplashScreen" component={SplashScreen} />
-
         </Stack.Navigator>
       </NavigationContainer>
       <FlashMessage 
