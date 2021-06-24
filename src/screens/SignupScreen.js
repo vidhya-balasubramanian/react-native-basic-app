@@ -12,7 +12,7 @@ import Icons from "react-native-vector-icons/MaterialIcons";
 import { showMessage } from "react-native-flash-message";
 import { Button } from 'react-native-elements';
 
-import FloatingLabelInput from "../common-components/FloatingLabelInput";
+import FloatingLabelInput from "../components/FloatingLabelInput";
 
 const SignupScreen = (props) => {
   const { navigation } = props;

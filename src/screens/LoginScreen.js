@@ -5,7 +5,7 @@ import { Auth } from "aws-amplify";
 import { showMessage } from "react-native-flash-message";
 import { Button } from 'react-native-elements';
 
-import FloatingLabelInput from "../common-components/FloatingLabelInput";
+import FloatingLabelInput from "../components/FloatingLabelInput";
 
 const LoginScreen = (props) => {
   const { navigation } = props;

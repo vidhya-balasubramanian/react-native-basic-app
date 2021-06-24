@@ -7,7 +7,7 @@ import { Button } from 'react-native-elements';
 
 import Icons from "react-native-vector-icons/MaterialIcons";
 
-import FloatingLabelInput from "../common-components/FloatingLabelInput";
+import FloatingLabelInput from "../components/FloatingLabelInput";
 
 const ConfirmationScreen = (props) => {
   const { navigation, route } = props;
