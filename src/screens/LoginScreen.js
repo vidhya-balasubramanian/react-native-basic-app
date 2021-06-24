@@ -1,8 +1,9 @@
 import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
-import { StyleSheet, Image, Button, View, Text, Alert } from "react-native";
+import { StyleSheet, Image, View, Text } from "react-native";
 import { Auth } from "aws-amplify";
 import { showMessage } from "react-native-flash-message";
+import { Button } from 'react-native-elements';
 
 import FloatingLabelInput from "../common-components/FloatingLabelInput";
 
@@ -11,9 +12,11 @@ const LoginScreen = (props) => {
 
   const [email, setEmail] = useState("vidhya.b@adcuratio.com");
   const [password, setPassword] = useState("Adcuratio@12nkjn3");
+  const [isLoading, setIsLoading] = useState(false);
 
   const signIn = (e) => {
     e.preventDefault();
+    setIsLoading(true);
     Auth.signIn({
       username: email,
       password,
@@ -28,6 +31,9 @@ const LoginScreen = (props) => {
           message: err.message,
           type: "danger"
         });
+      })
+      .finally(() => {
+        setIsLoading(false)
       });
   };
 
@@ -45,7 +51,11 @@ const LoginScreen = (props) => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button title="Login" disabled={!email || !password}  onPress={signIn} />
+        <Button 
+          title="Login" 
+          disabled={!email || !password}  
+          onPress={signIn} 
+          loading={isLoading}/>
         <Text style={styles.SignupTextWrapper}>
           New to Folksmedia?{" "}
           <Text

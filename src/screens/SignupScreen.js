@@ -1,9 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 import {
   StyleSheet,
   Image,
-  Button,
   View,
   Text,
   TouchableOpacity,
@@ -11,6 +10,7 @@ import {
 import { Auth } from "aws-amplify";
 import Icons from "react-native-vector-icons/MaterialIcons";
 import { showMessage } from "react-native-flash-message";
+import { Button } from 'react-native-elements';
 
 import FloatingLabelInput from "../common-components/FloatingLabelInput";
 
@@ -19,9 +19,11 @@ const SignupScreen = (props) => {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [isLoading, setIsLoading] = useState(false);
 
   const signUp = (e) => {
     e.preventDefault();
+    setIsLoading(true);
     Auth.signUp({ username: email, password, attributes: { email } })
       .then(() => {
         navigation.navigate("ConfirmationScreen", {
@@ -33,6 +35,9 @@ const SignupScreen = (props) => {
           message: err.message,
           type: "danger"
         });
+      })
+      .finally(() => {
+        setIsLoading(false)
       });
   };
 
@@ -61,6 +66,7 @@ const SignupScreen = (props) => {
           title="Sign up"
           disabled={!email || !password}
           onPress={signUp}
+          loading={isLoading}
         />
         <Text style={styles.TextWrapper}>
           <Text
