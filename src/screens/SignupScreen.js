@@ -9,8 +9,8 @@ import FloatingLabelInput from "../common-components/FloatingLabelInput";
 const Login = (props) => {
   const { navigation } = props;
 
-  const [email, setEmail] = useState("vidhya.b@adcuratio.com");
-  const [password, setPassword] = useState("Adcuratio@123");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   useEffect(() => {
     Amplify.configure({
@@ -23,6 +23,7 @@ const Login = (props) => {
   }, []);
 
   const signUp = (e) => {
+    navigation.navigate('ConfirmationScreen');
     e.preventDefault();
     Auth.signUp({ username: email, password, attributes: { email } })
       .then((data) => {
@@ -34,8 +35,8 @@ const Login = (props) => {
   };
   
   return (
-    <View style={styles.SignupWrapper}>
-      <View style={styles.InputBoxesWrapper}>
+    <View style={styles.ScreenWrapper}>     
+      <View style={styles.ContentWrapper}>
         <Image style={styles.Logo} source={require("../assets/logo.jpg")} />
         <FloatingLabelInput
           label="Email"
@@ -47,30 +48,28 @@ const Login = (props) => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-      </View>
-      <View style={[{ width: "80%" }]}>
-        <Button color="red" title="Login" onPress={signUp} />
+        <Button title="Sign up" onPress={signUp} />
       </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  SignupWrapper: {
-    height: "100%",
+  ScreenWrapper: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
     backgroundColor: "#fff",
   },
-  InputBoxesWrapper: {
+  ContentWrapper: {
     width: "80%",
-    margin: "auto",
   },
   Logo: {
     width: 85,
     height: 85,
     marginBottom: 20,
-  },
-  ButtonWrapper: {
-    color: "red"
+    marginLeft: "auto",
+    marginRight: "auto"
   }
 });
 

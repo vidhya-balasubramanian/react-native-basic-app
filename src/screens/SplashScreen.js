@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { ImageBackground, StyleSheet, Image, Text, Button } from "react-native";
 
 const SplashScreen = (props) => {
   const { navigation } = props;
+
+  useEffect(() => {
+    setTimeout(() => {
+      navigation.navigate('LoginScreen')
+    }, 700);
+  }, []);
 
   return (
     <ImageBackground
@@ -11,10 +17,6 @@ const SplashScreen = (props) => {
     >
       <Image style={styles.Logo} source={require("../assets/logo.jpg")} />
       <Text style={styles.TextWrapper}>Subtitle</Text>
-      <Button
-          title="Go to Login"
-          onPress={() => navigation.navigate('Login')}
-        />
     </ImageBackground>
   )
 };

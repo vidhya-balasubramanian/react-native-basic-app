@@ -39,43 +39,50 @@ const Login = (props) => {
   };
 
   return (
-    <View style={styles.ViewWrapper}>     
-      <Text>Sign In</Text>
-      <FloatingLabelInput
-            label="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-          />
-          <FloatingLabelInput
-            label="Password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <Button color="red" title="Sign In" onPress={signIn} />
-
+    <View style={styles.ScreenWrapper}>     
+      <View style={styles.ContentWrapper}>
+        <Image style={styles.Logo} source={require("../assets/logo.jpg")} />
+        <FloatingLabelInput
+          label="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
+        <FloatingLabelInput
+          label="Password"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
+        />
+        <Button title="Login" onPress={signIn} />
+        <Text style={styles.SignupTextWrapper} >New to Folksmedia? <Text style={styles.SignupText} onPress={() => navigation.navigate('SignupScreen')}>Signup</Text></Text>
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  ViewWrapper: {
-    // height: "100%",
-    // backgroundColor: "#fff",
+  ScreenWrapper: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#fff",
   },
-  ViewWrapper2: {
+  ContentWrapper: {
     width: "80%",
-    // display: "block",
-    margin: "auto",
   },
   Logo: {
     width: 85,
     height: 85,
-    // display: "block",
-    // margin: "auto",
     marginBottom: 20,
+    marginLeft: "auto",
+    marginRight: "auto"
   },
-  ButtonWrapper: {
-    color: "red"
+  SignupTextWrapper: {
+   marginTop: 10,
+   color: "grey",
+   textAlign: "center"
+  },
+  SignupText: {
+    color: "#1E57F1"
   }
 });
 

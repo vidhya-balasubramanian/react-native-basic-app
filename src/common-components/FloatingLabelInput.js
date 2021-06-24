@@ -14,22 +14,21 @@ export default function FloatingLabelInput(props) {
         value={value}
         onChange={onChange}
       />
-      
     </View>
   );
 }
 const styles = StyleSheet.create({
   InputWrapper: {
-    width: "80%",
+    width: "100%",
     height: 30,
-    borderColor: "red",
+    borderColor: "#cecaca",
     borderWidth: 1,
     paddingLeft: 10,
     paddingRight: 10,
     marginBottom: 20
   },
   LabelWrapper: {
-    color: "red",
+    color: "#5345f5",
     marginBottom: 10
   }
 });

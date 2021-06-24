@@ -44,39 +44,44 @@ const Login = (props) => {
   };
 
   return (
-    <View style={styles.ViewWrapper}>
-      <FloatingLabelInput
-        label="Confirmation Code"
-        value={code}
-        onChange={(e) => setCode(e.target.value)}
-      />
-      <Button color="red" title=" Confirm Sign Up" onPress={confirmSignUp} />
+    <View style={styles.ScreenWrapper}>     
+      <View style={styles.ContentWrapper}>
+        <Image style={styles.Logo} source={require("../assets/logo.jpg")} />
+        <FloatingLabelInput
+          label="Confirmation Code"
+          value={code}
+          onChange={(e) => setCode(e.target.value)}
+        />
+        <View style={styles.ConfirmSignUpSpacing}>
+          <Button title="Confirm Sign Up" onPress={confirmSignUp} />
+        </View>
+        <Button  title="Resend code" onPress={resendCode} />
 
-      <Button color="red" title="Resend code" onPress={resendCode} />
+      </View>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
-  ViewWrapper: {
-    // height: "100%",
-    // backgroundColor: "#fff",
+  ScreenWrapper: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#fff",
   },
-  ViewWrapper2: {
+  ContentWrapper: {
     width: "80%",
-    // display: "block",
-    margin: "auto",
   },
   Logo: {
     width: 85,
     height: 85,
-    // display: "block",
-    // margin: "auto",
     marginBottom: 20,
+    marginLeft: "auto",
+    marginRight: "auto"
   },
-  ButtonWrapper: {
-    color: "red",
-  },
+  ConfirmSignUpSpacing: {
+   marginBottom: 10
+  }
 });
 
 export default inject("store")(observer(Login));
