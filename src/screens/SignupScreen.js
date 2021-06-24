@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import {
   StyleSheet,
@@ -10,6 +10,7 @@ import {
 } from "react-native";
 import { Auth } from "aws-amplify";
 import Icons from "react-native-vector-icons/MaterialIcons";
+import { showMessage } from "react-native-flash-message";
 
 import FloatingLabelInput from "../common-components/FloatingLabelInput";
 
@@ -28,7 +29,10 @@ const SignupScreen = (props) => {
         });
       })
       .catch((err) => {
-        alert(err.message);
+        showMessage({
+          message: err.message,
+          type: "danger"
+        });
       });
   };
 

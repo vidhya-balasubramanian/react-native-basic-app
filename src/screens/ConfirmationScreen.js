@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { inject, observer } from "mobx-react";
 import { StyleSheet, Image, Button, View, Text, TouchableOpacity } from "react-native";
 import { Auth } from "aws-amplify";
+import { showMessage } from "react-native-flash-message";
 
 import Icons from "react-native-vector-icons/MaterialIcons";
 
@@ -12,21 +13,31 @@ const ConfirmationScreen = (props) => {
 
   const [email, setEmail] = useState(route?.params?.emailId || '');
   const [code, setCode] = useState("");
-
+  
   const confirmSignUp = (e) => {
     e.preventDefault();
     Auth.confirmSignUp(email, code)
       .then(() => {
         navigation.navigate("LoginScreen");
       })
-      .catch((err) => alert(err.message));
+      .catch((err) => {
+        showMessage({
+          message: err.message,
+          type: "danger"
+        });
+      });
   };
   const resendCode = () => {
     Auth.resendSignUp(email)
       .then(() => {
         alert("code resent successfully");
       })
-      .catch((err) => alert(err.message));
+      .catch((err) => {
+        showMessage({
+          message: err.message,
+          type: "danger"
+        });
+      });
   };
 
   return (

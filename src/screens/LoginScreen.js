@@ -1,15 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
 import { StyleSheet, Image, Button, View, Text, Alert } from "react-native";
 import { Auth } from "aws-amplify";
+import { showMessage } from "react-native-flash-message";
 
 import FloatingLabelInput from "../common-components/FloatingLabelInput";
 
 const LoginScreen = (props) => {
   const { navigation } = props;
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("vidhya.b@adcuratio.com");
+  const [password, setPassword] = useState("Adcuratio@12nkjn3");
 
   const signIn = (e) => {
     e.preventDefault();
@@ -23,7 +24,10 @@ const LoginScreen = (props) => {
         navigation.navigate("PostsScreen")
       })
       .catch((err) => {
-        alert(err.message);
+        showMessage({
+          message: err.message,
+          type: "danger"
+        });
       });
   };
 
@@ -52,6 +56,7 @@ const LoginScreen = (props) => {
           </Text>
         </Text>
       </View>
+      
     </View>
   );
 };

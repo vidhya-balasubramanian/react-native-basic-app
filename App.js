@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { Provider } from 'mobx-react';
 import Amplify from "aws-amplify";
+import FlashMessage from "react-native-flash-message";
 
 import ConfirmationScreen from "./src/screens/ConfirmationScreen";
 import LoginScreen from "./src/screens/LoginScreen";
@@ -46,6 +47,9 @@ export default function App() {
 
         </Stack.Navigator>
       </NavigationContainer>
+      <FlashMessage 
+        position="bottom"
+        duration={3000} />
     </Provider>
   );
 }
