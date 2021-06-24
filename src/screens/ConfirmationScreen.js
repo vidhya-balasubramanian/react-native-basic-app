@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
-import { StyleSheet, Image, Button, View, Text } from "react-native";
+import { StyleSheet, Image, Button, View, Text, TouchableOpacity } from "react-native";
 import { Auth } from "aws-amplify";
+
+import Icons from "react-native-vector-icons/MaterialIcons";
 
 import FloatingLabelInput from "../common-components/FloatingLabelInput";
 
@@ -30,6 +32,13 @@ const ConfirmationScreen = (props) => {
   return (
     <View style={styles.ScreenWrapper}>
       <View style={styles.ContentWrapper}>
+        <TouchableOpacity style={styles.BackIcon} onPress={() => navigation.goBack(null)}>
+          <Icons
+            name={"arrow-back"}
+            size={30}
+            color="#000"
+          />
+        </TouchableOpacity>
         <Image style={styles.Logo} source={require("../assets/logo.jpg")} />
         <FloatingLabelInput
           label="Email"
@@ -55,6 +64,11 @@ const ConfirmationScreen = (props) => {
 };
 
 const styles = StyleSheet.create({
+  BackIcon: {
+    position: "absolute",
+    top: 0,
+    left: 0
+  },
   ScreenWrapper: {
     flex: 1,
     alignItems: "center",
