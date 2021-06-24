@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { inject, observer } from "mobx-react";
-import { StyleSheet, Image, Button, View } from "react-native";
+import { StyleSheet, Image, Button, View, Text } from "react-native";
 import { Auth } from "aws-amplify";
 
 import FloatingLabelInput from "../common-components/FloatingLabelInput";
@@ -8,18 +8,19 @@ import FloatingLabelInput from "../common-components/FloatingLabelInput";
 const SignupScreen = (props) => {
   const { navigation } = props;
 
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [email, setEmail] = useState("vidhya.b@adcuratio.com");
+  const [password, setPassword] = useState("Adcuratio@123");
 
   const signUp = (e) => {
-    navigation.navigate('ConfirmationScreen');
-    e.preventDefault();
+    e.preventDefault();    
     Auth.signUp({ username: email, password, attributes: { email } })
-      .then((data) => {
-        console.log(data);
+      .then(() => {
+        navigation.navigate('ConfirmationScreen', {
+          emailId: email
+         });
       })
       .catch((err) => {
-        console.log(err);
+        alert(err.message);
       });
   };
   
@@ -37,7 +38,15 @@ const SignupScreen = (props) => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button title="Sign up" onPress={signUp} />
+        <Button title="Sign up" disabled={!email || !password} onPress={signUp} />
+        <Text style={styles.TextWrapper}>
+          <Text
+            style={styles.ConfirmText}
+            onPress={() => navigation.navigate("ConfirmationScreen")}
+          >
+            Confirm your code
+          </Text>
+        </Text>
       </View>
     </View>
   );
@@ -59,7 +68,15 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     marginLeft: "auto",
     marginRight: "auto"
-  }
+  },
+  TextWrapper: {
+    marginTop: 10,
+    color: "grey",
+    textAlign: "center",
+  },
+  ConfirmText: {
+    color: "#1E57F1",
+  },
 });
 
 export default inject("store")(observer(SignupScreen));

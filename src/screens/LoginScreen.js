@@ -41,7 +41,7 @@ const LoginScreen = (props) => {
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-        <Button title="Login" onPress={signIn} />
+        <Button title="Login" disabled={!email || !password}  onPress={signIn} />
         <Text style={styles.SignupTextWrapper}>
           New to Folksmedia?{" "}
           <Text

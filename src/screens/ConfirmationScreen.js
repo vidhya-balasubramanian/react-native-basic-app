@@ -6,46 +6,49 @@ import { Auth } from "aws-amplify";
 import FloatingLabelInput from "../common-components/FloatingLabelInput";
 
 const ConfirmationScreen = (props) => {
-  const { navigation } = props;
+  const { navigation, route } = props;
 
-  const [email, setEmail] = useState("vidhya.b@adcuratio.com");
+  const [email, setEmail] = useState(route?.params?.emailId || '');
   const [code, setCode] = useState("");
 
   const confirmSignUp = (e) => {
     e.preventDefault();
     Auth.confirmSignUp(email, code)
-      .then((data) => {
-        console.log(data);
-        setWaitingForCode(false);
-        setEmail("");
-        setCode("");
+      .then(() => {
+        navigation.navigate("LoginScreen");
       })
-      .catch((err) => console.log(err));
+      .catch((err) => alert(err.message));
   };
   const resendCode = () => {
     Auth.resendSignUp(email)
       .then(() => {
-        console.log("code resent successfully");
+        alert("code resent successfully");
       })
-      .catch((e) => {
-        console.log(e);
-      });
+      .catch((err) => alert(err.message));
   };
 
   return (
-    <View style={styles.ScreenWrapper}>     
+    <View style={styles.ScreenWrapper}>
       <View style={styles.ContentWrapper}>
         <Image style={styles.Logo} source={require("../assets/logo.jpg")} />
+        <FloatingLabelInput
+          label="Email"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+        />
         <FloatingLabelInput
           label="Confirmation Code"
           value={code}
           onChange={(e) => setCode(e.target.value)}
         />
         <View style={styles.ConfirmSignUpSpacing}>
-          <Button title="Confirm Sign Up" onPress={confirmSignUp} />
+          <Button
+            title="Confirm Sign Up"
+            onPress={confirmSignUp}
+            disabled={!email || !code}
+          />
         </View>
-        <Button  title="Resend code" onPress={resendCode} />
-
+        <Button title="Resend code" onPress={resendCode} disabled={!email} />
       </View>
     </View>
   );
@@ -66,11 +69,11 @@ const styles = StyleSheet.create({
     height: 85,
     marginBottom: 20,
     marginLeft: "auto",
-    marginRight: "auto"
+    marginRight: "auto",
   },
   ConfirmSignUpSpacing: {
-   marginBottom: 10
-  }
+    marginBottom: 10,
+  },
 });
 
 export default inject("store")(observer(ConfirmationScreen));
