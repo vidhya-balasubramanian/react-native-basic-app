@@ -9,20 +9,23 @@ import FloatingLabelInput from "../components/FloatingLabelInput";
 
 const LoginScreen = (props) => {
   const { navigation } = props;
-
+  // vidhya.inboxme@gmail.com
+  // Adcuratio@123
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
 
+  console.log("React native Testing")
   const signIn = (e) => {
     e.preventDefault();
+    debugger
     setIsLoading(true);
     Auth.signIn({
       username: email,
       password,
     })
       .then((user) => {
-        localStorage.setItem("UserInfo", JSON.stringify(user));
+        // localStorage.setItem("UserInfo", JSON.stringify(user));
         console.log(user);
         navigation.navigate("HomeScreen")
       })
@@ -44,16 +47,21 @@ const LoginScreen = (props) => {
         <FloatingLabelInput
           label="Email"
           value={email}
-          onChange={(e) => setEmail(e.target.value)}
+          onChange={(e) => {
+            debugger
+            setEmail(e.target.value)
+          }}
         />
         <FloatingLabelInput
           label="Password"
           value={password}
-          onChange={(e) => setPassword(e.target.value)}
+          onChange={(e) => {
+            setPassword(e.target.value)
+          }}
         />
         <Button 
           title="Login" 
-          disabled={!email || !password}  
+          // disabled={!(email && password)}  
           onPress={signIn} 
           loading={isLoading}/>
         <Text style={styles.SignupTextWrapper}>

@@ -119,7 +119,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   MenuItemWrapper: {
-    position: "fixed",
+    position: "absolute",
     width: "100%",
     bottom: 0,
     backgroundColor: "#fff",

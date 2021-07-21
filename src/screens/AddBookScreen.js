@@ -19,7 +19,6 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     marginBottom: 20,
-    outlineWidth: 0,
     marginLeft: 20,
   },
   LabelWrapper: {
